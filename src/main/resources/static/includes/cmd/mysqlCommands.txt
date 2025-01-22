@@ -1,0 +1,22 @@
+mysql commands 
+\connect --user tomee
+
+\sql
+show databases;
+use testdb;
+show tables;
+show fields in testusers;
+
+CREATE TABLE testusers2 (firstname	text,
+password	text,
+loginid	text,
+access	text,
+failedtime	int8,
+failedcount	int4,
+service	text,
+createdate	int8,
+goodemail	varchar,
+id	serial,
+email	text,
+lastname	text,
+CONSTRAINT PRIMARY KEY (loginid(50),service(10)));
