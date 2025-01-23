@@ -15,7 +15,7 @@
     <link href="includes/css/frames.css" type="text/css" rel="stylesheet" ></link>
   </head>  
   <body onload="snippets()"> 
-	<div class="snippets" title="mainNavigation.jsp"/>
+	<div class="snippets" title="mainNavigation.jsp"></div>
 	<div id="contentframe" class="content">
 	  <div>
 		<h3>Build programmatically connection to a new database provider</h3>

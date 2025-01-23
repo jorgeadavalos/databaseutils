@@ -44,6 +44,14 @@ public class UtilsDatabaseStatics {
     	managerCmds.put("setSize", "false");
     	wrkSQLs.put("postgresql",managerCmds);
     	
+    	managerCmds.put("show", " show databases");
+    	managerCmds.put("drop", " drop database %s");
+    	managerCmds.put("createdb", " create database %s");
+    	managerCmds.put("driver","NEED TO UPDATE");
+    	managerCmds.put("defaultdb", "");
+    	managerCmds.put("setSize", "false");
+    	wrkSQLs.put("default",managerCmds);
+    	
         return wrkSQLs;
     }
 }
