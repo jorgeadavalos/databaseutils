@@ -24,7 +24,10 @@
 			<li>copy a table from posgres to Mysql and viceverse.</li>
 			<li>the new table will be cloned from the database you are copying from.</li>
 		</ul>
-		
+		<div>
+		  <br/>if you have a question on how to use it or add functionality please click 
+		  <a href="mailto:ja_davalos@comcast.net?subject=questions about database utils">here</a> to send me an email 
+		</div>
 		<br/>
 		<div  id="download" style="padding:15px;">
 		  <h3>Download war file</h3>

@@ -216,3 +216,7 @@ function downloadJar(filename) {
 	url = "docservlet?resource=downloadfile&filename="+filename;
 	window.open(url,'_blank','titlebar=no,status=no,menubar=no');
 }
+function mailBody() {
+	window.open( "mailto:"+"ja_davalos@comcast.net"+""+"&Subject=question%20%20for%20copytable.js&body="+"HELLO", "_parent" ); 
+}
+
