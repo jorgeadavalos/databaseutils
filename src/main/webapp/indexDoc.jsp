@@ -9,7 +9,6 @@
 	  <h2>Copy table across database or across database managers.</h2><br/>
 	  <ul style="padding-left: 10px;">
 		<li><a href="#overview">Overview</a></li>
-		<li><a href="#configuration">JSF server configuration</a></li>
 		<li><a href="#download">Download jar file</a></li>
 		<li><a href="#top">Top</a></li>
 	  </ul>
@@ -29,7 +28,7 @@
 		<br/>
 		<div  id="download" style="padding:15px;">
 		  <h3>Download war file</h3>
-		  click  <a href="javascript:downloadJar()">here</a> to download war-file
+		  click  <a href="javascript:downloadJar('databaseutils-1.0.war')">here</a> to download war-file 'databaseutils-1.0.war'
 		  <br/>
 		</div>
 	  </div>

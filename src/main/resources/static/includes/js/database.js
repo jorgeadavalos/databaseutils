@@ -212,3 +212,7 @@ function updateJson(inputs,json) {
 		json[index] = element.value;
 	}
 }
+function downloadJar(filename) {
+	url = "docservlet?resource=downloadfile&filename="+filename;
+	window.open(url,'_blank','titlebar=no,status=no,menubar=no');
+}

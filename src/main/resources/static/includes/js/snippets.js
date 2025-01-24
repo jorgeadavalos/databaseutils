@@ -23,7 +23,7 @@ function snippets() {
 		}
 		ajaxRequest(obj,"GET");
 	}
-	if (!fadinFlag) collectBeanTags();
+//	if (!fadinFlag) collectBeanTags();
 }
 function isSnippetsCached(domElement) {
 	let key = domElement.title;
