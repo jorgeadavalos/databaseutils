@@ -53,7 +53,7 @@ public class ASocketComm {
 			String jsonStr = recvResp();
 			JSONObject jsonObj = bldJson( jsonStr);
 			JSONArray services = (JSONArray)jsonObj.get("service");
-			services.forEach(service -> UtilsDatabaseStatics.SERVICES.put((String)service, (String)service) );
+			services.forEach(service -> DatabaseUtilsStatics.SERVICES.put((String)service, (String)service) );
 		} finally {
 			if (socket != null) try { socket.close(); } catch (IOException e) {e.printStackTrace();};
 		}

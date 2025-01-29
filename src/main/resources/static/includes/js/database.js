@@ -3,12 +3,29 @@ const _FOUND = '302';
 const _NOTFOUND = '404';
 const _SERVICEUNAVAILABLE = '503';
 
+function verifyRequired(name) {
+	let el = document.getElementById(name);
+	if (el != null) {
+		let fromTable = el.value.trim();
+		if (fromTable.length == 0) {
+			setMsg('infomsg','you must enter a fromtable value ');
+			el.focus();
+			return false;
+		}
+	}
+	return true;
+}
 function verifyTables(...names) {
 
 	let param = "?";
   	for (let name of names) {
     	param += name+"="+document.getElementById(name).value+"&";
  	 }
+	 if (!verifyRequired('fromTable')) return;
+	 if (!verifyRequired('fromDatabase')) {
+		dataSourceReq();
+		return;
+	 }
 	var obj = new ajaxObj(_RESTBASE+"/verifyTables"+param);
 	obj.ajaxFunc = function(objResp) {
 		let json = JSON.parse(objResp.ajaxmsg);
@@ -21,6 +38,11 @@ function verifyTables(...names) {
 	};
 	ajaxRequest(obj,"GET");
 	return false;
+}
+function dataSourceReq() {
+	if (!verifyRequired('fromTable')) return;
+	setMsg('infomsg','');
+	showMyModal('newConnModal');
 }
 function bldPrimarykey(json) {
 	let serverTable = json["table"];
@@ -160,7 +182,14 @@ function exitTask(parm) {
 }
 function dataSourceInputs(json) {
 	let inputs = [];
-	inputs["fromurl"] = document.getElementById("fromurl");
+	let fromurl = document.getElementById("fromurl");
+	if (fromurl == null || fromurl.value.length == 0) {
+		let text = "You must enter Source (From) Data source";
+		fromurl.focus();
+		setMsg('newConnInfomsg',text)
+		return false;
+	}
+	inputs["fromurl"] = fromurl;
 	inputs["fromuserid"]  = document.getElementById("fromuserid");
 	inputs["frompsw"] = document.getElementById("frompsw");
 	let url = inputs["fromurl"];

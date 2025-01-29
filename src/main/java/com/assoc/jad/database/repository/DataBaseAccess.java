@@ -24,7 +24,7 @@ import java.lang.reflect.Parameter;
 //import javax.naming.InitialContext;
 //import javax.sql.DataSource;
 
-import com.assoc.jad.database.tools.UtilsDatabaseStatics;
+import com.assoc.jad.database.tools.DatabaseUtilsStatics;
 
 /**
  * this class implements the database access. The name of the 'schema' variable is fixed because
@@ -164,7 +164,7 @@ public class DataBaseAccess<T> {
         	for (int i=1;i <=col;i++) {
         		Object value = rst.getObject(i);
         		if (value != null && value.getClass().getName().equals("java.lang.String"))
-        			value = UtilsDatabaseStatics.undoSpecialChars(value.toString());
+        			value = DatabaseUtilsStatics.undoSpecialChars(value.toString());
 
         		if (value != null)
         			executeMethods(bldAModelName("set",meta.getColumnName(i)),value,instance);
@@ -193,7 +193,7 @@ public class DataBaseAccess<T> {
     			else if (type.equals("java.lang.String")||type.equals("java.sql.Timestamp")) {
     				 if (retObj.equals("java.sql.Blob"))
         	    			sqlColValue += "?,";
-    				 else sqlColValue += "'"+UtilsDatabaseStatics.specialChars(retObj.toString())+"',";  //html special chars representation
+    				 else sqlColValue += "'"+DatabaseUtilsStatics.specialChars(retObj.toString())+"',";  //html special chars representation
     			} else if (!meta.isAutoIncrement(i)) sqlColValue += retObj.toString()+",";
     		}
     	}
@@ -220,7 +220,7 @@ public class DataBaseAccess<T> {
     			else if (type.equals("java.lang.String")||type.equals("java.sql.Timestamp")) {
     				 if (retObj.equals("java.sql.Blob"))
         	    			sqlColValue += "?,";
-    				 else sqlColValue += "'"+UtilsDatabaseStatics.specialChars(retObj.toString())+"',";  //html special chars representation
+    				 else sqlColValue += "'"+DatabaseUtilsStatics.specialChars(retObj.toString())+"',";  //html special chars representation
     			} else if (!meta.isAutoIncrement(i)) 
     				sqlColValue += retObj.toString()+",";
     		}
@@ -354,7 +354,7 @@ public class DataBaseAccess<T> {
         		Object value = rst.getObject(i);
         		if (value == null) value = "";
         		if (value != null && value.getClass().getName().equals("java.lang.String")) {
-        			value = "'"+UtilsDatabaseStatics.undoSpecialChars(value.toString())+"'";
+        			value = "'"+DatabaseUtilsStatics.undoSpecialChars(value.toString())+"'";
         		}
         		if (value != null) values.append(value).append(",");
         	}

@@ -26,7 +26,7 @@
 			  <tr><td>To   Table name:</td><td></td><td><input type="text" id="toTable"/></td></tr>  
 			  <tr><td>From database name:</td><td></td><td><input type="text" id="fromDatabase" title="default to active dataSource"/></td></tr>  
 			  <tr><td>To database name:</td><td></td><td><input type="text" id="toDatabase" title="default to active dataSource"/></td></tr>  
-		  	  <tr><td>Build DataSource:</td><td>*</td><td><button type="button" onclick="showMyModal('newConnModal')">Click Here!</button></td></tr>  
+		  	  <tr><td>Build DataSource:</td><td>*</td><td><button type="button" onclick="dataSourceReq()">Click Here!</button></td></tr>  
 			</table>
 			<div style="padding-top: 10px;">
 				<button type="button" onclick="exitTask('myModal')" id="modalButton"><b>exit</b></button>
@@ -55,7 +55,7 @@
 				<h3></h3>
 				<table id="newConnTable" border="0">
 				  <tr><th colspan='4'>Source (From) Data source</th></tr>
-				  <tr><th>URL</th><td></td><td><div title="jdbc:postgresql://hostname:1234/testDB"><input type="text" size='40' id="fromurl" value=""/></div></td></tr> 
+				  <tr><th>URL</th><td>*</td><td><div title="jdbc:postgresql://hostname:1234/testDB"><input type="text" size='40' id="fromurl" value=""/></div></td></tr> 
 				  <tr><th>user id</th><td></td><td><div title="database login user id"><input type="text" id="fromuserid" size='40' value="" /></div></td></tr> 
 				  <tr><th>Password</th><td></td><td><div title="database password"><input type="password" id="frompsw" size='40' value="" /></div></td></tr> 
 			 	  <tr><th colspan='4'>Destination (To) Data source</th></tr>

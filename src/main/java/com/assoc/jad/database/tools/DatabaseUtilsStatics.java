@@ -7,7 +7,7 @@ import java.util.concurrent.Executors;
 
 import javax.sql.DataSource;
 
-public class UtilsDatabaseStatics {
+public class DatabaseUtilsStatics {
 	public static Socket SOCKETLBDISCOVERY = null;
 	public static ExecutorService SERVICETHREADS = Executors.newFixedThreadPool(10);
 	public static HashMap<String,String> SERVICES = new HashMap<>();
@@ -44,6 +44,7 @@ public class UtilsDatabaseStatics {
     	managerCmds.put("setSize", "false");
     	wrkSQLs.put("postgresql",managerCmds);
     	
+    	managerCmds = new HashMap<>();
     	managerCmds.put("show", " show databases");
     	managerCmds.put("drop", " drop database %s");
     	managerCmds.put("createdb", " create database %s");

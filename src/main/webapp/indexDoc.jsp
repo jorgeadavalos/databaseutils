@@ -6,7 +6,8 @@
 	<head>
 	</head>
 	<body>
-	  <h2>Copy table across database or across database managers.</h2><br/>
+		<h2>DatabaseUtils.</h2>
+		<h2>Copy table across database or across database managers.</h2><br/>
 	  <ul style="padding-left: 10px;">
 		<li><a href="#overview">Overview</a></li>
 		<li><a href="#download">Download jar file</a></li>

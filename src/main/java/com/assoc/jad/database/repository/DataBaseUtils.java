@@ -17,7 +17,7 @@ import org.json.simple.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
-import com.assoc.jad.database.tools.UtilsDatabaseStatics;
+import com.assoc.jad.database.tools.DatabaseUtilsStatics;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
@@ -35,8 +35,8 @@ public class DataBaseUtils {
 		Connection toDBCconnection = null;
 		JSONObject jsonOut = new JSONObject();
 		try {
-			fromDBCconnection = UtilsDatabaseStatics.dynDataSources.get("fromDBConn").getConnection();
-			DataSource toDataSource = UtilsDatabaseStatics.dynDataSources.get("toDBConn");
+			fromDBCconnection = DatabaseUtilsStatics.dynDataSources.get("fromDBConn").getConnection();
+			DataSource toDataSource = DatabaseUtilsStatics.dynDataSources.get("toDBConn");
 			if (toDataSource != null) toDBCconnection = toDataSource.getConnection();
 			else toDBCconnection = fromDBCconnection;
 			
@@ -87,7 +87,7 @@ public class DataBaseUtils {
 			if (url == null || url.length() == 0) return null;
 			
 			url = url.toLowerCase();
-			Iterator<String> iter = UtilsDatabaseStatics.DBMGRCMDS.keySet().iterator();
+			Iterator<String> iter = DatabaseUtilsStatics.DBMGRCMDS.keySet().iterator();
 			while (iter.hasNext() ) {
 				String key = iter.next();
 				String wrkkey = key.toLowerCase();
@@ -111,8 +111,8 @@ public class DataBaseUtils {
 		String toDatabase = inputs.get("toDatabase");
 
 		try {
-			toDBCconnection = UtilsDatabaseStatics.dynDataSources.get("toDBConn").getConnection();
-			fromDBCconnection = UtilsDatabaseStatics.dynDataSources.get("fromDBConn").getConnection();
+			toDBCconnection = DatabaseUtilsStatics.dynDataSources.get("toDBConn").getConnection();
+			fromDBCconnection = DatabaseUtilsStatics.dynDataSources.get("fromDBConn").getConnection();
 			fromDBCconnection.setAutoCommit(false);
 			toDBCconnection.setAutoCommit(false);
 
@@ -139,7 +139,7 @@ public class DataBaseUtils {
 			closeConnections(fromDBCconnection,toDBCconnection);
 		}
 		jsonOut.put("status", Integer.toString(HttpStatus.OK.value()));
-		jsonOut.put("infomsg", "sucessflly copied and stored in database='"+ toDatabase + "' in table=" + toTable );
+		jsonOut.put("infomsg", "sucessfully copied and stored table '"+toTable+"' in database='"+ toDatabase+"'" );
 		return jsonOut;
 	}
 	@SuppressWarnings("unchecked")
@@ -158,7 +158,8 @@ public class DataBaseUtils {
 		if (tourl == null || tourl.length() == 0) {
 			jsonOut.put ("tourl",reqBodyJson.get("fromurl"));
 			jsonOut.put("toDatabase",jsonOut.get("fromDatabase"));
-			UtilsDatabaseStatics.dynDataSources.put("toDBConn",UtilsDatabaseStatics.dynDataSources.get("fromDBConn"));
+			jsonOut.put("status", Integer.toString(HttpStatus.OK.value()));
+			DatabaseUtilsStatics.dynDataSources.put("toDBConn",DatabaseUtilsStatics.dynDataSources.get("fromDBConn"));
 		}
 		return jsonOut;
 	}
@@ -167,7 +168,7 @@ public class DataBaseUtils {
 		
 		String url = (String) wrkJson.get("url");
 		String dBManagementName = url.split(":")[1];
-		HashMap<String,String> dBManagement = UtilsDatabaseStatics.DBMGRCMDS.get(dBManagementName);	//mysql, postgresql....
+		HashMap<String,String> dBManagement = DatabaseUtilsStatics.DBMGRCMDS.get(dBManagementName);	//mysql, postgresql....
 
 		jsonOut.put("status", Integer.toString(HttpStatus.CONFLICT.value()));
 		jsonOut.put("infomsg", "The URL is not correctl url="+url);
@@ -181,7 +182,7 @@ public class DataBaseUtils {
     	DataSource ds = bldDataSource(dBManagement,wrkJson,dynDBName,jsonOut);
     	if (ds == null) return;
     	
-    	UtilsDatabaseStatics.dynDataSources.put(connKey,ds);
+    	DatabaseUtilsStatics.dynDataSources.put(connKey,ds);
     	if (connKey.startsWith("fromDBConn")) return;
     	
     	DataSource dsRoot = bldDataSource(dBManagement,wrkJson,dBManagement.get("defaultdb"),jsonOut);
@@ -391,7 +392,7 @@ public class DataBaseUtils {
 	}
 
 	private String bldPrimaryKeyFields(ResultSetMetaData fromFieldMeta,String toDBManager) {
-		HashMap<String,String> manager = UtilsDatabaseStatics.DBMGRCMDS.get(toDBManager);
+		HashMap<String,String> manager = DatabaseUtilsStatics.DBMGRCMDS.get(toDBManager);
 		String varCntrl = " <input type='hidden' id='setSize' value='"+manager.get("setSize")+"'> ";
 		String template = "<input type='checkbox' value='%s ' onclick='collectcheckedValues(this)'>";
 		StringBuilder sb = new StringBuilder(varCntrl);
