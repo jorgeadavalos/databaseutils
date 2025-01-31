@@ -25,6 +25,7 @@ public class MyConfiguration extends SpringBootServletInitializer implements Ser
 	@Value("${my.SERVERDISCOVERYNAME}") 		private String LBNAME;
 	@Value("${my.REGISTERASSERVICE}")			private boolean REGISTERASSERVICE;
 	@Value("${spring.application.name}")		private String SERVICENAME;
+	@Value("${my.DYNSERVERPORT}") 				private int DYNSERVERPORT;	//if server.port == 0 then actual port is not available yet.
 	@Value("${server.port}")					private int PORTBOOTAPP;
 	@Value("${server.servlet.context-path}")	private String CONTEXTPATH;
 	@Value("${spring.mvc.view.suffix}")			private String SUFFIX;
