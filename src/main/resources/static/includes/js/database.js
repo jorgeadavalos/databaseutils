@@ -248,4 +248,11 @@ function downloadJar(filename) {
 function mailBody() {
 	window.open( "mailto:"+"ja_davalos@comcast.net"+""+"&Subject=question%20%20for%20copytable.js&body="+"HELLO", "_parent" ); 
 }
-
+function anchorTag(anchor) {
+	let landingTags = document.getElementsByClassName('landingTag');
+	for (let i=0;i<landingTags.length;i++) {
+		landingTags[i].className = "";
+	}
+	let nanchorEl = document.getElementById(anchor.hash.substring(1));
+	nanchorEl.className = "landingTag";
+}

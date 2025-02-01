@@ -29,6 +29,7 @@ public class MyConfiguration extends SpringBootServletInitializer implements Ser
 	@Value("${server.port}")					private int PORTBOOTAPP;
 	@Value("${server.servlet.context-path}")	private String CONTEXTPATH;
 	@Value("${spring.mvc.view.suffix}")			private String SUFFIX;
+	@Value("${my.DNS}")							private String DNS;
 	
 //	@Autowired
 //    private ServletContext servletContext;
@@ -58,9 +59,11 @@ public class MyConfiguration extends SpringBootServletInitializer implements Ser
 		String welcome = "/index.xhtml";
 		if (SUFFIX != null) welcome = "/index"+SUFFIX;
 		String instanceURL = "http://" ;
-
+		DNS = DNS.trim();
+		
 		try {
-			instanceURL += InetAddress.getLocalHost().getHostName();
+			if (DNS.length() > 0) instanceURL += DNS;
+			else instanceURL += InetAddress.getLocalHost().getHostName();
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		}
@@ -72,6 +75,7 @@ public class MyConfiguration extends SpringBootServletInitializer implements Ser
 		json.put("welcome",welcome);
 		json.put("ctr","0");
 		json.put("method",method);
+		json.put("dns",DNS);
 //		json.put("jsonlbobj",bldLoadBalancerObj());
 
 		inputs.put("reqJson", json);
